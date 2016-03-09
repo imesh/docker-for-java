@@ -5,7 +5,7 @@
 .metadata
 
 # IntelliJ IDEA Project Files
-.idea/*
+.idea/
 *.iml
 *.ipr
 *.iws
