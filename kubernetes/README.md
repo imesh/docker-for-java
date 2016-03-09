@@ -8,7 +8,8 @@ This folder contains artifacts for deploying Tomcat 8.0 in Kubernetes.
     # https://github.com/imesh/kubernetes-vagrant-setup
     
     # Deploy replication controller and service
-    kubectl create -f *.yaml
+    kubectl create -f tomcat-controller.yaml
+    kubectl create -f tomcat-service.yaml
     
     # Wait until pod status change to Running
     kubectl get pods
