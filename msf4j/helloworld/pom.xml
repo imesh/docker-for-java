@@ -20,42 +20,52 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
-        <groupId>org.wso2.msf4j</groupId>
-        <artifactId>msf4j-service</artifactId>
+        <groupId>org.java.colombo</groupId>
+        <artifactId>docker-for-java-parent</artifactId>
         <version>1.0.0-SNAPSHOT</version>
-        <relativePath>../../poms/msf4j-service/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.wso2.msf4j.sample</groupId>
     <artifactId>helloworld</artifactId>
-
-    <name>Sample: Hello World Microservice</name>
+    <name>Hello World Microservice</name>
+    <dependencies>
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.wso2.msf4j</groupId>
+            <artifactId>msf4j-core</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
 
     <properties>
         <microservice.mainClass>org.wso2.msf4j.example.Application</microservice.mainClass>
     </properties>
 
     <build>
-      <plugins>
-        <plugin>
-          <groupId>com.spotify</groupId>
-          <artifactId>docker-maven-plugin</artifactId>
-          <version>0.4.0</version>
-          <configuration>
-            <imageName>helloworld</imageName>
-            <baseImage>java</baseImage>
-            <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
-            <!-- copy the service's jar file from target into the root directory of the image -->
-            <resources>
-               <resource>
-                 <targetPath>/</targetPath>
-                 <directory>${project.build.directory}</directory>
-                 <include>${project.build.finalName}.jar</include>
-               </resource>
-            </resources>
-          </configuration>
-        </plugin>
-      </plugins>
+        <plugins>
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.0</version>
+                <configuration>
+                    <imageName>helloworld</imageName>
+                    <baseImage>java</baseImage>
+                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <!-- copy the service's jar file from target into the root directory of the image -->
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory}</directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 </project>
