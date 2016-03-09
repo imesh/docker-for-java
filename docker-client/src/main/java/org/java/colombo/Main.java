@@ -20,6 +20,7 @@
 package org.java.colombo;
 
 import com.github.dockerjava.api.DockerClient;
+import com.github.dockerjava.api.command.CreateContainerResponse;
 import com.github.dockerjava.api.command.ListImagesCmd;
 import com.github.dockerjava.api.model.Image;
 import com.github.dockerjava.core.DockerClientBuilder;
@@ -39,6 +40,17 @@ public class Main {
                 .withDockerHost("tcp://192.168.99.100:2376").build();
         DockerClient dockerClient = DockerClientBuilder.getInstance(config).build();
 
+        listImages(dockerClient);
+        //runContainer(dockerClient, "tomcat:8.0");
+    }
+
+    private static void runContainer(DockerClient dockerClient, String imageTag) {
+        System.out.println("Starting container: " + imageTag);
+        CreateContainerResponse container = dockerClient.createContainerCmd(imageTag).exec();
+        dockerClient.startContainerCmd(container.getId()).exec();
+    }
+
+    private static void listImages(DockerClient dockerClient) {
         ListImagesCmd cmd = dockerClient.listImagesCmd();
         System.out.println("Executing docker images command...");
         List<Image> images = cmd.exec();
