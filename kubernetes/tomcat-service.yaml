@@ -3,7 +3,7 @@ kind: Service
 metadata:
   labels:
     name: tomcat
-  name: tomcat
+  name: tomcat-service
 spec:
   type: NodePort
   sessionAffinity: ClientIP
